@@ -1,59 +1,77 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+// Função recursiva para movimentar a Torre
+// Move a Torre para a direita N vezes
+void moverTorre(int casas) {
+    if (casas <= 0) return; // Condição de parada
+    printf("Direita\n");
+    moverTorre(casas - 1); // Chamada recursiva
+}
+
+// Função recursiva para movimentar a Rainha
+// Move a Rainha para a esquerda N vezes
+void moverRainha(int casas) {
+    if (casas <= 0) return;
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+// Função recursiva para o Bispo com loops aninhados
+// Move o Bispo verticalmente, e em cada passo, horizontalmente
+
+void moverBispoDiagonal(int passos) {
+    if (passos <= 0) return;
+
+    // Loop interno para simular o movimento horizontal
+    for (int h = 0; h < 1; h++) {
+        printf("Cima, ");
+    }
+
+    // Movimento vertical
+    printf("Direita\n");
+
+    moverBispoDiagonal(passos - 1);
+}
+
+// Função com loops complexos para o Cavalo
+// Simula movimento em "L": duas casas para cima e uma para a direita
+void moverCavalo() {
+
+    int movimentos = 0;
+
+    // Loop externo: controla o movimento vertical (duas vezes "Cima")
+    for (int cima = 0; cima < 2; cima++) {
+        printf("Cima\n");
+        movimentos++;
+
+        // Loop interno: só executa na última iteração vertical
+        if (cima == 1) {
+            for (int direita = 0; direita < 1; direita++) {
+                printf("Direita\n");
+                movimentos++;
+            }
+        }
+    }
+}
 
 int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
-    int bispo = 0, rainha = 0;
+    // Quantidade de casas para cada peça
+    int casasTorre = 5;
+    int casasRainha = 8;
+    int casasBispoDiagonal = 5;
 
-    printf("\n");
-    // Implementação de Movimentação do Bispo
-    //Move Bispo 5 casas para a diagonal direita ^>
-    for (int i = 0; i < 5; i++){
-        printf("Cima, Direita\n"); //imprime 5 vezes a direção da peça
-    }
+    printf("\nMovimento da Torre:\n");
+    moverTorre(casasTorre);
 
-    printf("\n");
-    // Implementação de Movimentação da Torre
-    //Mover a Torre 5 casas para direita >
-    for (int i = 0; i < 5; i++){
-        printf("Direita \n"); //imprime 5 vezes a direção da peça
-    }
+    printf("\nMovimento da Rainha:\n");
+    moverRainha(casasRainha);
 
-    printf("\n");
-    // Implementação de Movimentação da Rainha
-    // Move Rainha 8 casas para esquerda <
-    do{
-        printf("Esquerda\n");//imprime 8 vezes a direção da peça
+    printf("\nMovimento do Bispo:\n");
+    moverBispoDiagonal(casasBispoDiagonal);
 
-        rainha++;
-    }while(rainha < 8);
 
-    printf("\n");
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-    // Move o cavalo duas casas para baixo e uma para esquerda
-    int i,j = 1;
-    for (int i = 1; i <= 1; i++){
-
-    // Enquanto j for menor ou igual dois que nesse caso o valor dele é 1, ele vai voltar e imprimir novamente depois ele sai do while e imprime oque esta no for
-       while (j <= 2){ 
-        printf("Baixo, ");
-        j++;
-       }
-        printf("Esquerda\n");
-    }
-    
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+    printf("\nMovimento do Cavalo:\n");
+    moverCavalo();
 
     return 0;
 }
